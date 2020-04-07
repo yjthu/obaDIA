@@ -1,1 +1,2 @@
 *.pl linguist-language=Perl
+*.js linguist-language=Perl
