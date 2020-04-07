@@ -1,7 +1,7 @@
 # obaDIA
 obaDIA: one-step biological analysis pipeline for quantitative proteomics data from data independent acquisition mass spectrometry
 
-obaDIA uses protein abundance and protein sequence data as inputs and performs differential protein expression analysis, functional annotation and enrichment analysis in a completely automate way. obaDIA was designed for quantitative data independent acquisition proteiomics data initially, it can also be applied to data produced by other quantitative proteomic techniques, such as iTRAQ/TMT, Label-free proteomics. obaDIA is not only easy to use but also runs fast. It usually takes only a few tens of minutes to complete a typical analysis workflow.
+obaDIA takes protein abundance and sequence data as inputs and performs differential protein expression analysis, functional annotation and enrichment analysis in a completely automate way. obaDIA was designed for quantitative data independent acquisition proteiomics data initially, it can also be applied to data produced by other quantitative proteomic techniques, such as iTRAQ/TMT, Label-free proteomics. obaDIA is easy to use and runs fast. All source codes and demos of obaDIA (third-party softwares are not included) are distributed for academic use only. For any other use, including any commercial use, please contact us first (info@e-omics.com).
 
 ## Contents
 * [Installation](#installation)
