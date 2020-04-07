@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sci-Hub | A review on mass spectrometry-based quantitative proteomics: Targeted and data independent acquisition. Analytica Chimica Acta, 964, 7–23 | 10.1016/j.aca.2017.01.059</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+    <script type = "text/javascript">
+        function clip(element)
+        {
+          var $temp = $("<input>");
+          $("body").append($temp);
+          $temp.val($(element).text()).select();
+          document.execCommand("copy");
+          $temp.remove();
+        }
+        
+        $(document).ready(function() {
+            
+            var doi = '10.1016/j.aca.2017.01.059';
+            
+            if (doi.substr(0, 7) == '10.0000')
+            {
+                document.getElementById('reload').style.display = 'none';
+                
+                if (doi.indexOf('generic') > -1)
+                    document.getElementById('link').style.display = 'none';
+            }
+            
+            else if( $('#citation').text() == ' ')
+                $("#citation").load('//sci-hub.tw/cite/10.1016/j.aca.2017.01.059');
+            
+        });
+    </script>
+    <style type = "text/css">
+        
+        html, body {height: 100%; width:100%; margin: 0; overflow:hidden}
+        div {font-family: -apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif}
+
+        #menu {width: 360px; height: 100%; position: fixed; z-index: 1;  top: 0;  left: 0; background-color: white;  overflow-x: hidden}
+
+        #header {cursor:pointer}
+	#logo {background:url('//sci-hub.tw/misc/img/ravenround.gif') no-repeat;width: 165px;height:157px;margin-left:18px}
+	#sci {background:#bbb;color:white;margin: 50px 0 0 10px; padding:5px 20px 5px 25px;font-size:38px}
+	#sci:hover {background:#B22222}
+	#motto {color:#999; margin: 18px 0 0 24px;font-size: 18px}
+
+	#buttons {margin-top: 55px; width: 100%; font-size: 22px}
+	#buttons a {color:#999; text-decoration:none}
+	#buttons a:hover {color:#999}
+	#buttons ul {margin: 0; padding: 0; margin-left: 12px}
+	#buttons ul li {display: inline; margin-left: 6px; padding: 12px}
+	#buttons ul li:hover {border: solid 1px #999; border-radius: 8px}
+
+	#citation {margin: 48px 25px 0 25px; font-size: 18px; cursor: pointer}
+        #citation:active {color:#aaa}
+	#citation a {color:#666;text-decoration:none}
+	#citation a:hover {text-decoration:underline}
+
+	#description {margin: 25px 0 0 0; text-align: center; font-size: 18px; width: 100%; padding: 12px 24px 12px 0}
+	#description a {color: green; text-decoration: none}
+
+	#link {margin: 12px 0 0 25px; font-size: 16px; color:#aaa}
+	#link a {color: #aaa; text-decoration: underline}
+        
+	#social {margin: 32px 0 0 25px; font-size: 18px; color:#aaa}
+	#social a {color: #333; text-decoration:none}
+	#social a:hover {color: #B22222}
+
+	#creator {margin: 10px 0 0 25px; font-size: 18px; color: #aaa}
+	#creator a {color: #333; text-decoration:none}
+	#creator a:hover {color: #B22222}
+
+        #article {margin-left: 360px; height:100%}
+        iframe {width:100%;height:100%}
+
+	td {vertical-align:top}
+        
+        
+    </style>
+    
+    <div id="menu">
+	<table onclick = "window.open('//sci-hub.tw/')"><tr>
+        <td><div id = "logo"></div></td>
+	<td>
+            <div id = "sci"><nobr>sci-hub</nobr></div>
+            <div id = "motto">to open science</div>
+        </td>
+	</tr></table>
+
+	<div id = "buttons">
+
+            <ul>
+	        <li id = "reload"><a target = "_blank" href = "//sci-hub.tw/reload/10.1016/j.aca.2017.01.059">↻ reload</a></li>
+	        <li><a href = # onclick = "location.href='https://twin.sci-hub.tw/6981/8192f720ca706382f3cd8932f1c49ef2/vidova2017.pdf?download=true'">⇣ save</a></li>
+            </ul>
+
+	</div>
+
+	<div id = "citation" onclick = "clip(this)">Vidova, V., & Spacil, Z. (2017). <i>A review on mass spectrometry-based quantitative proteomics: Targeted and data independent acquisition. Analytica Chimica Acta, 964, 7–23.</i> doi:10.1016/j.aca.2017.01.059&nbsp;</div>
+
+        <div id = "link">
+            url to share this paper:<br>
+            <a href ="https://sci-hub.tw/10.1016/j.aca.2017.01.059"><nobr>sci-hub.tw/10.1016/j.aca.2017.01.059</nobr></a>
+        </div>
+        
+	<div id = "description" onclick = "window.open('//sci-hub.tw/donate')">
+	Sci-Hub is a project<br>to make knowledge free.<br><a target = "_blank" href = "//sci-hub.tw/donate">support →</a>
+	</div>
+
+        <div id = "social">
+            updates on <a target = "_blank" href = "//twitter.com/Sci_Hub">twitter</a>
+        </div>
+
+        <div id = "creator">
+            founder <a target = "_blank" href = "//facebook.com/alexandra.elbakyan">Alexandra Elbakyan</a>
+        </div>
+
+    </div>
+
+    <div id="article">
+        <iframe src = "https://twin.sci-hub.tw/6981/8192f720ca706382f3cd8932f1c49ef2/vidova2017.pdf#view=FitH" id = "pdf"></iframe>
+    </div>
+    
+<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter10183018 = new Ya.Metrika({ id:10183018, clickmap:true, trackLinks:true, accurateTrackBounce:true, ut:"noindex" }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/10183018?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+    </body>
+</html>

@@ -1,0 +1,152 @@
+outdir/                                               
+├── Anno                                               # Functional annotation output directory
+│   ├── Annotation.txt
+│   ├── Annotation.xls                                 # formated annotation summay table
+│   ├── blastp.outfmt6
+│   ├── eggNOG.anno
+│   ├── eggNOG.anno.plotdata
+│   ├── eggNOG.anno.plotdata.bar.pdf                   # eggNOG annotation bar plot
+│   ├── eggNOG.anno.plotdata.bar.png
+│   ├── GO.anno
+│   ├── GO.anno.output
+│   │   ├── GO_classification_bar.pdf                  # GO annotation bar plot
+│   │   ├── GO_classification_bar.png
+│   │   ├── GO_classification_count.txt
+│   │   ├── GO_classification.R
+│   │   └── GO_classification.xls                      # GO annotation detail
+│   ├── Kegg.anno
+│   ├── Kegg.anno.output
+│   │   ├── KEGG_classification_count.txt
+│   │   ├── KEGG_classification.pdf                    # KEGG annotation bar chart
+│   │   ├── KEGG_classification.png
+│   │   ├── KEGG_classification.R
+│   │   └── KEGG_classification.xls                    # KEGG annotation detail
+│   ├── Kegg.anno.plotdata
+│   ├── PFAM.anno
+│   ├── pfam.log
+│   ├── seq.fa.gene_trans_map
+│   ├── signalp.out
+│   ├── trinotate_annotation_report.xls
+│   ├── TrinotatePFAM.out
+│   └── Trinotate.sqlite
+├── Diff                                               # Abundance and Differntial expression(DE) analysis directory
+│   ├── compare.txt
+│   ├── diff_results                                   # DE analysis output directory
+│   │   ├── BvsA                                       # One directory for each comparation 
+│   │   │   ├── BvsA.diff.id
+│   │   │   ├── BvsA.diff.seq
+│   │   │   ├── BvsA.diff.updown
+│   │   │   ├── BvsA.diff.xls                          # formated differntial expression information table 
+│   │   │   ├── BvsA.diff.xls.volcano.pdf              # volcano plot
+│   │   │   └── BvsA.diff.xls.volcano.png
+│   │   ├── CvsA
+│   │   │   ├── ...
+│   │   ├── DvsA
+│   │   │   ├── ...
+│   │   ├── EvsA
+│   │   │   ├── ...
+│   │   └── FvsA
+│   │       ├── ...
+│   ├── group.txt
+│   ├── mapDIA                                         # raw DE analysis output directory
+│   │   ├── analysis_output.txt
+│   │   ├── analysis_output_wide_format.txt
+│   │   ├── fragment_selection.txt
+│   │   ├── log2_data.txt
+│   │   ├── mapDIA.conf
+│   │   └── param.txt
+│   ├── mapDIA.input
+│   └── tableProcess                                   # Abundance analysis output directory
+│       ├── DIA.count.xls                              # raw abundance table
+│       ├── DIA.means.xls                              # mean abundance table
+│       ├── DIA.means.xls.abHeatmap.pdf                # mean abundance heatmap
+│       ├── DIA.means.xls.abHeatmap.png
+│       ├── DIA.means.xls.boxplot.pdf                  # mean abundance box plot
+│       ├── DIA.means.xls.boxplot.png
+│       ├── DIA.means.xls.corHeatmap.pdf               # mean correlation heatmap
+│       ├── DIA.means.xls.corHeatmap.png
+│       ├── DIA.means.xls.corMatrix.pdf                # mean correlation-matrix plot
+│       ├── DIA.means.xls.corMatrix.png
+│       ├── DIA.means.xls.density.pdf                  # mean abundance density plot
+│       ├── DIA.means.xls.density.png
+│       ├── DIA.means.xls.violon.pdf                   # mean abundance violon plot
+│       ├── DIA.means.xls.violon.pdf
+│       ├── DIA.normalized.xls                         # normalized abundance table
+│       ├── DIA.normalized.xls.abHeatmap.pdf           # normalized abundance heatmap
+│       ├── DIA.normalized.xls.abHeatmap.png
+│       ├── DIA.normalized.xls.boxplot.pdf             # normalized abundance box plot		
+│       ├── DIA.normalized.xls.boxplot.png
+│       ├── DIA.normalized.xls.corHeatmap.pdf          # normalized correlation heatmap
+│       ├── DIA.normalized.xls.corHeatmap.png
+│       ├── DIA.normalized.xls.corMatrix.pdf           # normalized correlation-matrix plot
+│       ├── DIA.normalized.xls.corMatrix.png
+│       ├── DIA.normalized.xls.density.pdf             # normalized abundance density plot
+│       ├── DIA.normalized.xls.density.png
+│       ├── DIA.normalized.xls.violon.pdf              # normalized abundance violon plot
+│       └── DIA.normalized.xls.violon.png
+├── Enrich                                             # Functional enrichment analysis directory
+│   ├── All                                            # Expressed protein functional enrichment analysis directory
+│   │   ├── All.go_bar.pdf                             # GO enrichment bar plot
+│   │   ├── All.go_bar.png
+│   │   ├── All.hsa.annotate
+│   │   ├── All.hsa.dmout
+│   │   ├── All.identify.GO
+│   │   ├── All.identify.GO.xls                        # formated GO enrichment result table
+│   │   ├── All.identify.Kegg
+│   │   ├── All.identify.Rectome
+│   │   ├── All.identify.Rectome.top20
+│   │   ├── All.identify.Rectome.xls                   # formated Rectome enrichment result table
+│   │   ├── All.KeggEnrich
+│   │   ├── All.KeggEnrich.html                        # KEGG enrichment html formated report
+│   │   ├── All.KeggEnrich.top20
+│   │   ├── All.KeggEnrich.top20.scatterplot.pdf       # KEGG enrichment scatter plot
+│   │   ├── All.KeggEnrich.top20.scatterplot.png
+│   │   ├── All.KeggEnrich.xls                         # formated KEGG enrichment result table
+│   │   ├── All.Rectome.Enrich.scatterplot.pdf         # Rectome enrichment scatter plot
+│   │   ├── All.Rectome.Enrich.scatterplot.png
+│   │   ├── go.resource
+│   │   ├── seq.len
+│   │   └── src
+│   ├── BvsA                                           # DE enrichment analysis directory, one directory for each comparation
+│   │   ├── BvsA.annomap
+│   │   ├── BvsA.go_bar.pdf                            # GO enrichment bar plot
+│   │   ├── BvsA.go_bar.png
+│   │   ├── BvsA.GO_BP_DAG.pdf                         # GO enrichment DAG plots (BP)
+│   │   ├── BvsA.GO_BP_DAG.png
+│   │   ├── BvsA.GO_CC_DAG.pdf                         # GO enrichment DAG plots (CC)
+│   │   ├── BvsA.GO_CC_DAG.png
+│   │   ├── BvsA.GO_MF_DAG.pdf                         # GO enrichment DAG plots (MF)
+│   │   ├── BvsA.GO_MF_DAG.png
+│   │   ├── BvsA.hsa.annotate
+│   │   ├── BvsA.hsa.dmout
+│   │   ├── BvsA.identify.GO
+│   │   ├── BvsA.identify.GO.xls                       # formated GO enrichment result table
+│   │   ├── BvsA.identify.Kegg
+│   │   ├── BvsA.identify.pfam
+│   │   ├── BvsA.identify.pfam.xls                     # formated PFAM enrichment result table
+│   │   ├── BvsA.identify.pfam.xls.top20
+│   │   ├── BvsA.identify.Rectome
+│   │   ├── BvsA.identify.Rectome.top20
+│   │   ├── BvsA.identify.Rectome.xls                  # formated Rectome enrichment result table
+│   │   ├── BvsA.KeggEnrich
+│   │   ├── BvsA.KeggEnrich.html
+│   │   ├── BvsA.KeggEnrich.top20
+│   │   ├── BvsA.KeggEnrich.top20.scatterplot.pdf      # KEGG enrichment scatter plot
+│   │   ├── BvsA.KeggEnrich.top20.scatterplot.png
+│   │   ├── BvsA.KeggEnrich.xls                        # formated KEGG enrichment result table
+│   │   ├── BvsA.PFAM.Enrich.scatterplot.pdf           # PFAM enrichment scatter plot
+│   │   ├── BvsA.PFAM.Enrich.scatterplot.png
+│   │   ├── BvsA.Rectome.Enrich.scatterplot.pdf        # Rectome enrichment scatter plot
+│   │   ├── BvsA.Rectome.Enrich.scatterplot.png
+│   │   ├── gene2pfam_formated.txt
+│   │   ├── go.resource
+│   │   └── src
+│   ├── CvsA
+│   │   ├── ...
+│   ├── DvsA
+│   │   ├── ...
+│   ├── EvsA
+│   │   ├── ...
+│   ├── FvsA
+│   │   ├── ...
+└── OneStep.sh                                         # one-step workflow script

@@ -1,0 +1,39 @@
+###input file
+FILE= 14-3-3_data_648.txt
+
+
+### Experimental design
+EXPERIMENTAL_DESIGN =ReplicateDesign
+
+
+### Filter
+SDF= 2
+MIN_CORREL =0.2
+MIN_OBS = 2
+MIN_FRAG_PER_PEP = 3
+MAX_FRAG_PER_PEP = 5
+MIN_PEP_PER_PROT = 1
+
+
+### Sample information
+LABELS=-60mins 0mins 1mins 10mins 30mins 100mins
+SIZE=3 
+
+
+### min. max. DE
+MIN_DE= .01
+MAX_DE =.99
+
+
+### Contrast matrix for group comparison
+CONTRAST=
+- 1 0 0 0 0
+0 - 0 0 0 0
+0 1 - 0 0 0
+0 1 0 - 0 0
+0 1 0 0 - 0
+0 1 0 0 0 -
+
+
+### protein_level.txt
+MAX_PEP_PER_PROT = 5

@@ -1,0 +1,29 @@
+###input file
+FILE=14-3-3_data_648.txt
+
+### Experimental design
+EXPERIMENTAL_DESIGN= independentdesign
+
+### Normalization
+NORMALIZATION= TIS
+
+#### Filter
+SDF= 2
+MIN_CORREL= 0.2
+MIN_OBS = 9 
+MIN_FRAG_PER_PEP = 3
+MAX_FRAG_PER_PEP = 5
+MIN_PEP_PER_PROT = 1
+MAX_PEP_PER_PROT = 5 ### protein_level.txt
+
+### Sample information
+LABELS=-
+SIZE=18
+
+### min. max. DE
+MIN_DE= .01 
+MAX_DE =.99 
+
+### Contrast matrix for group comparison
+CONTRAST=
+-

@@ -1,0 +1,89 @@
+
+2014-12-24 (v1.1.0) :
+fix max. number of fragments per peptide
+
+2015-01-27 (v1.1.1) :
+protein-level, peptide-level options added
+
+2015-02-25 (v1.2.1) :
+options --version and --help added
+
+2015-03-24 (v1.2.2) :
+retention times rounded off to n decimal places
+
+2015-07-23 (v1.2.3) :
+corrected the GAF file input
+
+2015-09-17 (v1.2.4) :
+fixed error in counting non-missing values for ReplicateDesign
+fixed error when using empty strings for missing values
+fixed error in calculation of log2 fold change
+
+2015-09-22 (v2.0.0) :
+Allowed for incorporation of second module data
+When module data is used, proteins are analysed independently first before
+incorporation of module data in the subsequent analysis
+fixed fragment centering for replicateDesign (for replicates with only 1
+non-missing in the row)
+fixed outlier detection (affects fragment_selection.txt only)
+
+2015-10-16 (v2.0.1) :
+fixed outlier detection (missing intensities not to be marked as outliers)
+
+2015-10-18 (v2.0.2) :
+Duplicated row names will have "_duplicate" appended to them in the output
+files
+
+2015-10-22 (v2.0.3) :
+For peptide-level only: peptides are assumed to be repeated measures for the
+parent protein
+
+2015-11-05 (v2.0.4) :
+Resolved 'inf' input
+
+2015-11-28 (v2.0.5) :
+MIN_OBS allowed to be 1
+
+2015-12-06 (v2.0.6) :
+Fixed error when rows are all missing data
+
+2015-12-08 (v2.0.7) :
+LOG2_TRANSFORMATION added
+
+2015-12-11 (v2.1.0) :
+mapDIA for normalisation, filtering without contrast
+
+2016-01-19 (v2.2.0) :
+FUDGE option added.
+
+2016-02-01 (v2.2.1) :
+REMOVE_SHARED_PEPTIDE option added.
+IMPUTE_SCALE option added.
+
+2016-03-04 (v2.3.0) :
+IMPUTE option added.
+
+2016-04-11 (v2.3.1) :
+wideform output added
+
+2016-05-31 (v2.3.2) :
+corrected error in "fragment_selection.txt" column "SHARED_PEPTIDE"
+
+2016-06-04 (v2.3.3) :
+*_level.txt files will set missing values to 0 (previously (row minimum)/2).
+
+2016-07-04 (v2.4.0) :
+INCLUSION_LIST option added.
+Output file "fragments_for_protein_quantification.txt" added.
+
+2016-07-15 (v2.4.1) :
+Corrected error when fudge is on and impute is not set.
+
+2016-11-22 (v3.0.1) :
+pseudoCV option added.
+
+2017-02-06 (v3.0.2) :
+SignedScore column added.
+
+2017-11-24 (v3.1.0) :
+log2FC_SE column added.
