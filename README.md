@@ -267,7 +267,7 @@ outdir/
 │   │   └── param.txt
 │   ├── mapDIA.input
 │   └── tableProcess                                   # Abundance analysis output directory
-│       ├── DIA.count.xls                              # raw abundance table
+│       ├── DIA.count.xls                              # peak number statistic for each sample
 │       ├── DIA.means.xls                              # mean abundance table
 │       ├── DIA.means.xls.abHeatmap.pdf                # mean abundance heatmap
 │       ├── DIA.means.xls.abHeatmap.png
