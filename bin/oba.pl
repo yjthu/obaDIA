@@ -26,7 +26,7 @@ Options
 		-fdr 		<f> : default: 0.1
 		-comp 		<s> : how to compare the groups, just use numbers, 1:2		
 		-alt	 	<s> : kobas3.0 GO/Rectome enrichment species abbr. [default: the same as "-spe"]
-		-mod		<s> : for enrichment, use total(T) or expressed(E) as background. default: E
+		-mod		<s> : backgroud choose for enrichment, total(T) or expressed(E). [default: E]
 		
 		-h|?|help   :  Show this help
 =========================================================================
