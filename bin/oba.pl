@@ -26,13 +26,14 @@ Options
 		-fdr 		<f> : default: 0.1
 		-comp 		<s> : how to compare the groups, just use numbers, 1:2		
 		-alt	 	<s> : kobas3.0 GO/Rectome enrichment species abbr. [default: the same as "-spe"]
+		-mod		<s> : for enrichment, use total(T) or expressed(E) as background. default: E
 		
 		-h|?|help   :  Show this help
 =========================================================================
 USAGE
 }
 
-my ($help, $fa, $expr, $outdir, $group, $groupname, $compare, $fc_cutoff, $fdr_cutoff, $species, $spe_go);
+my ($help, $fa, $expr, $outdir, $group, $groupname, $compare, $fc_cutoff, $fdr_cutoff, $species, $spe_go, $mod);
 GetOptions(
 		"h|?|help"=>\$help,
 		"fas=s"=>\$fa,
@@ -45,6 +46,7 @@ GetOptions(
 		"fdr=f"=>\$fdr_cutoff,
 		"spe=s"=>\$species,
 		"alt=s" =>\$spe_go,
+		"mod=s" =>\$mod,
 
 );
 
@@ -63,6 +65,7 @@ $compare ||= '1:2';
 $fc_cutoff ||= 1;
 $fdr_cutoff ||= 0.1;
 $spe_go ||= $species;
+$mod ||= 'E';
 my $ko = 'no';
 if($species eq 'ko'){
 	$ko = 'yes';
@@ -141,7 +144,7 @@ print OUT "perl $bin/Enrich/enrichP.pl -directory-kobas-output $outdir/Enrich/Al
 foreach my $each(@compares){
 	print OUT "mkdir -p $outdir/Enrich/$each\n";
 		print OUT "echo \"perl $bin/Enrich/extractMyChr.v2.pl $fa fa $outdir/Diff/diff_results/$each/$each.diff.id >$outdir/Diff/diff_results/$each/$each.diff.seq\" >>$outdir/Diff/.diffP.sh\n";
-		print OUT "perl $bin/Enrich/enrichP.pl -directory-kobas-output $outdir/Enrich/$each -samplename $each -species $species -bg $outdir/Enrich/All/All -diffGeneSeq $outdir/Diff/diff_results/$each/$each.diff.seq -goanno $outdir/Anno/GO.anno -pfanno $outdir/Anno/PFAM.anno -summary $outdir/Enrich/All/seq.len -diffid $outdir/Diff/diff_results/$each/$each.diff.id -updown $outdir/Diff/diff_results/$each/$each.diff.updown -difftb $outdir/Diff/diff_results/$each/$each.diff.xls -ko $ko -spe_go $spe_go\n";
+		print OUT "perl $bin/Enrich/enrichP.pl -directory-kobas-output $outdir/Enrich/$each -samplename $each -species $species -bg $outdir/Enrich/All/All -mod $mod -diffGeneSeq $outdir/Diff/diff_results/$each/$each.diff.seq -goanno $outdir/Anno/GO.anno -pfanno $outdir/Anno/PFAM.anno -summary $outdir/Enrich/All/seq.len -diffid $outdir/Diff/diff_results/$each/$each.diff.id -updown $outdir/Diff/diff_results/$each/$each.diff.updown -difftb $outdir/Diff/diff_results/$each/$each.diff.xls -ko $ko -spe_go $spe_go\n";
 }
 close OUT;
 `sh $outdir/.step0.sh`;
@@ -152,7 +155,7 @@ open OUT, ">$outdir/OneStep.sh" or die $!;
 print OUT "\necho Begin Diff Analysis :\ndate\n";
 print OUT "cd $outdir/Diff\n";
 print OUT "sh .diffP.sh >.diffP.sh.o 2>.diffP.sh.e\n";
-print OUT "\necho Begin Annotaion:\ndate\n";
+print OUT "\necho Begin Annotation:\ndate\n";
 print OUT "cd $outdir/Anno\n";
 print OUT "sh .annoP.sh $fa >.annoP.sh.o 2>.annoP.sh.e\n";
 print OUT "\necho Begin Enrichment:\ndate\n";

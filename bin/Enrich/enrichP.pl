@@ -12,17 +12,18 @@ Description		protein functional enrichment pipeline
 Options
 		-directory-kobas-output <s> : output files directory
 		-samplename 			<s> : sample name for output files
-		-species 				<s> : species for kegg or background annotate file
+		-species 			<s> : species for kegg or background annotate file
 		-diffGeneSeq 			<s> : protein sequence fasta
-		-goanno 				<s> : goanno file
-		-diffid 				<s> : protein id list
-		-updown 				<s> : updown file
-		-difftb 				<s> : diffrential expressed protein information file
-		-ko 					<s> : if or not ko enrichment [yes/no]
-		-spe_go 				<s> : species for kobas GO and Rectome [na/spe]
-		-pfanno 				<s> : pfam_anno file
-		-summary 				<s> : protein length file
-		-bg 					<s> : background file prefix[*.spe.annotate]
+		-goanno 			<s> : goanno file
+		-diffid 			<s> : protein id list
+		-updown 			<s> : updown file
+		-difftb 			<s> : diffrential expressed protein information file
+		-ko 				<s> : if or not ko enrichment [yes/no]
+		-spe_go 			<s> : species for kobas GO and Rectome [na/spe]
+		-pfanno 			<s> : pfam_anno file
+		-summary 			<s> : protein length file
+		-bg 				<s> : background file prefix[*.spe.annotate]
+		-mod				<s> : mode for backgroud, T for -spe and E for -bg(default)
 		-h|?|help   			:  Show this help
 =========================================================================
 USAGE
@@ -37,7 +38,7 @@ my $kobasDB = "/storage/data/PUBLIC/databases/KOBAS_3.0_db";
 my $Rscript = "Rscript";
 my $diamond="diamond";
 
-my ($outdir,$samplename,$species,$diffseq,$goanno,$diffid,$updown,$difftb,$ko,$spe_go,$pfanno,$summary,$bg,$help);
+my ($outdir,$samplename,$species,$diffseq,$goanno,$diffid,$updown,$difftb,$ko,$spe_go,$pfanno,$summary,$bg,$mod,$help);
 GetOptions (
 	"directory-kobas-output=s" => \$outdir,
 	"samplename=s"=>\$samplename,
@@ -52,6 +53,7 @@ GetOptions (
 	"pfanno=s" => \$pfanno,
 	"summary=s" => \$summary,
 	"bg=s" => \$bg,
+	"mod=s" => \$mod,
 	"h|?|help"=>\$help,
 );
 
@@ -89,7 +91,9 @@ if($spe_go ne $species && $spe_go ne 'na'){
 
 $ko ||= 'no';
 $spe_go ||= $species;
+$mod ||= 'E';
 my $identify_bg = $species;
+
 my $cmd='';
 
 # kobas kegg enrich
@@ -103,7 +107,9 @@ if($species eq 'ko'){
 
 if($species ne 'ko'){
 	if($bg){
+		if($mod eq 'E'){
 			$identify_bg="$bg.$species.annotate";
+		}
 	}
 	$cmd .= "$diamond blastp -d $kobasDB/seq_pep/$species.dmnd -q $diffseq -o $outdir/$samplename.$species.dmout --outfmt 6 --tmpdir . --more-sensitive -k 1 --quiet\n";
 	$cmd .= "kobas-annotate -i $outdir/$samplename.$species.dmout -t blastout:tab -s $species -o $outdir/$samplename.$species.annotate\n";
@@ -122,7 +128,9 @@ if($spe_go ne 'na'){
 	# kobas go enrich
 	$identify_bg = $spe_go;
 	if($bg){
-		$identify_bg="$bg.$spe_go.annotate";
+		if($mod eq 'E'){
+			$identify_bg="$bg.$spe_go.annotate";
+		}
 	}
 	$cmd .= "kobas-identify -f $outdir/$samplename.$spe_go.annotate -b $identify_bg -d G -o $outdir/$samplename.identify.GO\n\n";
 	if($goanno && $gotype){
