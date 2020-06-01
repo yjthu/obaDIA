@@ -14,6 +14,7 @@ obaDIA takes protein abundance and sequence data as inputs and performs differen
     * [Run the one-step pipeline](#3-run-the-one-step-pipeline)
 * [Parameters](#parameters)
 * [Output files](#output-files)
+* [Citation](#citation)
 
 ## Installation
 
@@ -363,3 +364,10 @@ outdir/
 └── OneStep.sh                                         # one-step workflow script
 
 ```
+
+
+## Citation
+
+If you use obaDIA in your work, please cite the publication as follows:
+
+Yan J, Zhai H, Zhu L, Ding X. obaDIA: one-step biological analysis pipeline for quantitative proteomics data from data independent acquisition mass spectrometry. bioRxiv 2020.05.28.121020; doi: https://doi.org/10.1101/2020.05.28.121020
