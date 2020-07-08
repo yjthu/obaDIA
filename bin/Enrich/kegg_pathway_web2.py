@@ -80,7 +80,7 @@ def main_flow(row):
 			soup=bs(content,"html.parser")
 			img=soup.find_all('img')
 			for each_img in img:
-				if each_img.has_attr('name') and each_img['name'] == 'pathwayimage':
+				if each_img.has_attr('id') and each_img['id'] == 'pathwayimage':
 					pic_url='https://www.genome.jp'+ each_img['src']
 					break
 			urllib.urlretrieve(pic_url,filename='src/%s.png' % pathway)
