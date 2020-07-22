@@ -137,7 +137,7 @@ nohup sh example_fast.sh &
 #### 2. From docker
 If you use docker to run obaDIA, you should creat a docker container first. The command line is like this:
 ```Bash
-# 1. set directories, edit them as your own directory
+# 1. set directories
 workdir=/storage/data/PROJECT/biouser1/TestDocker
 obadir=/storage/data/PROJECT/biouser1/TestDocker/obaDIA
 kobasdbdir=/storage/data/PUBLIC/databases/KOBAS_3.0_db
@@ -154,7 +154,7 @@ nohup sh example_fast.sh &
 
 If you build obaDIA with `bash INSTALL.sh -n` command, `signalpdir` and `-v $signalpdir:$signalpdir` is no more needed. Then, the command line is like this:
 ```Bash
-# 1. set directories, edit them as your own directory
+# 1. set directories
 workdir=/storage/data/PROJECT/biouser1/TestDocker
 obadir=/storage/data/PROJECT/biouser1/TestDocker/obaDIA
 kobasdbdir=/storage/data/PUBLIC/databases/KOBAS_3.0_db
@@ -193,7 +193,7 @@ We provide four example script files in `example` directory, they are:
 example_prot.sh		# A standard script to run obaDIA using a protein-level matrix as input.
 example_pep.sh		# A standard script to run obaDIA using a peptide-level matrix as input.
 example_frag.sh		# A standard script to run obaDIA using a fragment-level matrix as input.
-example_fast.sh		# Another script to run obaDIA using a protein-level matrix as input, but use the fast mode to skip several time consuming steps.
+example_fast.sh		# Another script to run obaDIA using a protein-level matrix as input, but use the fast mode to skip several time-consuming steps.
 ```
 
 What you need to do is copy one of these files to your work dirctory and edit it according to your own needs.
@@ -222,7 +222,7 @@ perl ../bin/oba.pl \
 -spe hsa \
 -thread 40
 
-# then, an all-in-one workflow script named OneStep.sh will be generated in the output dirctory
+# then, an all-in-one workflow script named 'OneStep.sh' will be generated in the output dirctory
 # run this workflow
 sh $out/OneStep.sh >$out/OneStep.sh.o 2>&1
 ```
@@ -307,10 +307,10 @@ This parameter is used to set the abbreviation of species for GO/Rectome enrichm
 This parameter is used to set the backgroud for enrichment analysis. We proposed a new enrichment strategy in obaDIA, which use expressed protein as backgroud for the enrichment analysis; this is the default choice. If you want perform enrichment analysis use a traditional manner, which use the total proteins in a species as backgroud, set this parameter as `-mod T`.
 
 ##### -thread
-This parameter is used to set the thread number for hmmscan software in annotation step. Because Pfam annotation is time consuming, using multiple threads could dramatically accelerate the annotation step.
+This parameter is used to set the thread number for hmmscan software in annotation step. Because Pfam annotation is time-consuming, using multiple threads could dramatically accelerate the annotation step.
 
 ##### -fast
-This parameter is used to skip several time-consuming steps in obaDIA. No value is needed. It can make the total time consuming of obaDIA pipeline shortened from one to two hours to three to five minutes.
+This parameter is used to skip several time-consuming steps in obaDIA. No value is needed. It can make the total time-consuming of obaDIA pipeline shortened from 1~2 hours to 3~5 minutes.
 
 ## Output files
 
