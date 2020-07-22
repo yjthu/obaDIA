@@ -14,7 +14,7 @@ obaDIA takes a fragment-level, peptide-level or protein-level abundance matrix f
 	* [From docker](#2-from-docker)
 * [Usage](#usage)
     * [Input files](#1-input-files)
-    * [Modified one of the example scripts](#2-modified-one-of-the-example-scripts)
+    * [Edit one of the example scripts](#2-edit-one-of-the-example-scripts)
     * [Run the modified script](#3-run-the-modified-script)
 * [Parameters](#parameters)
 * [Output files](#output-files)
@@ -49,7 +49,7 @@ bash build_db.sh
 ```
 This step may take several minites to hours, depend on your network speed.
 
-Then, download species data from [Kobas 3.0 database](ftp://ftp.cbi.pku.edu.cn/pub/KOBAS_3.0_DOWNLOAD),  both the files from `seq_pep` and `sqlite3` directories are needed. Abbreviation of sepcies refer to `db/species_abbr.txt`.
+Then, download species data from Kobas 3.0 database [(ftp://ftp.cbi.pku.edu.cn/pub/KOBAS_3.0_DOWNLOAD)](ftp://ftp.cbi.pku.edu.cn/pub/KOBAS_3.0_DOWNLOAD]), both the files from `seq_pep` and `sqlite3` directories are needed. Abbreviation of sepcies refer to `db/species_abbr.txt`.
 
 Finally, set the home directory of Kobas 3.0 database in `env/.kobasrc`, and copy this file to your home dirctory, like this:
 ```Bash
@@ -137,33 +137,33 @@ nohup sh example_fast.sh &
 #### 2. From docker
 If you use docker to run obaDIA, you should creat a docker container first. The command line is like this:
 ```Bash
-#1. set directories, edit them as your own directory
+# 1. set directories, edit them as your own directory
 workdir=/storage/data/PROJECT/biouser1/TestDocker
 obadir=/storage/data/PROJECT/biouser1/TestDocker/obaDIA
 kobasdbdir=/storage/data/PUBLIC/databases/KOBAS_3.0_db
 signalpdir=/storage/data/PUBLIC/softwares/SignalP/signalp-4.1
 
-#2. creat a docker container named obadia
+# 2. creat a docker container named obadia
 docker run -v $workdir:$workdir -v $obadir:$obadir -v $obadir/env:/root -v $kobasdbdir:$kobasdbdir -v $signalpdir:$signalpdir --name obadia yjcbscau/eomics-base /bin/bash
 docker run -it --privileged=true --volumes-from obadia yjcbscau/eomics-base /bin/bash
 
-#3. run script in the container
+# 3. run script in the container
 cd example
 nohup sh example_fast.sh &
 ```
 
 If you build obaDIA with `bash INSTALL.sh -n` command, `signalpdir` and `-v $signalpdir:$signalpdir` is no more needed. Then, the command line is like this:
 ```Bash
-#1. set directories, edit them as your own directory
+# 1. set directories, edit them as your own directory
 workdir=/storage/data/PROJECT/biouser1/TestDocker
 obadir=/storage/data/PROJECT/biouser1/TestDocker/obaDIA
 kobasdbdir=/storage/data/PUBLIC/databases/KOBAS_3.0_db
 
-#2. creat a docker container named obadia
+# 2. creat a docker container named obadia
 docker run -v $workdir:$workdir -v $obadir:$obadir -v $obadir/env:/root -v $kobasdbdir:$kobasdbdir --name obadia yjcbscau/eomics-base /bin/bash
 docker run -it --privileged=true --volumes-from obadia yjcbscau/eomics-base /bin/bash
 
-#3. run script in the container
+# 3. run script in the container
 cd example
 nohup sh example_fast.sh &
 ```
@@ -186,14 +186,14 @@ pep.ab.tsv		# peptide-level abundance matrix file in TSV format. The first colum
 frag.ab.tsv		# fragment-level abundance matrix file in TSV format. The first column is the protein id, the second columns is the peptide sequence, the third columns is the fragment information, the other columns are the abundance for each sample.
 ```
 
-#### 2. Modified one of the example scripts
+#### 2. Edit one of the example scripts
 
 We provide four example script files in `example` directory, they are:
 ```Bash
-example_prot.sh	# A standard script to run obaDIA using a protein-level matrix as input.
-example_pep.sh	# A standard script to run obaDIA using a peptide-level matrix as input.
-example_frag.sh	# A standard script to run obaDIA using a fragment-level matrix as input.
-example_fast.sh	# Another script to run obaDIA using a protein-level matrix as input, but use the fast mode to skip several time consuming steps.
+example_prot.sh		# A standard script to run obaDIA using a protein-level matrix as input.
+example_pep.sh		# A standard script to run obaDIA using a peptide-level matrix as input.
+example_frag.sh		# A standard script to run obaDIA using a fragment-level matrix as input.
+example_fast.sh		# Another script to run obaDIA using a protein-level matrix as input, but use the fast mode to skip several time consuming steps.
 ```
 
 What you need to do is copy one of these files to your work dirctory and edit it according to your own needs.
@@ -270,47 +270,47 @@ Optional:
 ```
 
 Each parameter is explained in detail as follows:
-#####`-fas`
+##### -fas
 This parameter is used to set the input protein sequence file. Only standard FASTA format file is accepted, with the first line is the protein identifier start with `>`, the second line is the protein sequence, the protein sequence can also be broken into multiple lines. The protein identifier must be consist of letters and numbers, and no blank or special characters are allowed, except for `_`. For the the protein identifier uniprot ID is prefered because we need to link it to the uniprotKB database, but this is not necessary.
 
-#####`-exp` 
+##### -exp
 This parameter is used to set the input abundance matrix file. Only standard TSV format file is accepted, which means each column is seperated by tab. For DIA data, protein-level, peptide-level or fragment-level matrix is acceptable, if use protein-level file as input, no need to set the `-level` parameter; if use peptide-level or fragment-level matrix as input, the `-level`  parameter must be set to either `pep` or `frag`.
 
-#####`-level`
+##### -level
 This parameter is used to set the level or type of input abundance matrix file. The default value is `prot`; if use peptide-level or fragment-level matrix as input, it must be set to either `pep` or `frag`.
 
-#####`-out`
+##### -out
 This parameter is used to set the output directory, it must be a absolute path, a reletive path is not allowed.
 
-#####`-group`
+##### -group
 This parameter is used to assign the samples to the groups and set the order of groups. Use sample names but not group names to set it. For samples in the same group, the sample names should be seperated by `/`. For different groups, the seperater between samples should be `,`. The sample names must can be found in the first row of the abundance matrix, and must be consist of letters and numbers, and no blank or special characters are allowed, except for `_`.
 
-#####`-name`
+##### -name
 This parameter is used to set the group names, according to the order of `-group` parameter.
 
-#####`-comp`
+##### -comp
 This parameter is used to set the comparison between groups for DE analysis. For only one comparison, the default value is set to `1:2`; for multiple comparisons, it must be set according to the index of the order of `-name` parameter. For example, `-comp 2:1,3:1,4:1,5:1,6:1` means every group shoud be compared to the first group, with the first group as a control.
 
-#####`-fc`
+##### -fc
 This parameter is used to set the log2(foldChange) cutoff for DE proteins. The default value is 1.
 
-#####`-fdr`
+##### -fdr
 This parameter is used to set the FDR(false discovery rate) cutoff generated by mapDIA for DE proteins. The default value is 0.1.
 
-#####`-spe`
+##### -spe
 This parameter is used to set the abbreviation of species for KEGG enrichment analysis. At the present release of KOBAS 3.0, more than 4000 species are supported which can refer to the "db/species_abbr.txt" file; for species not in this list, a relative or model species should be selected.
 
-#####`-alt`
+##### -alt
 This parameter is used to set the abbreviation of species for GO/Rectome enrichment analysis. At the present release of KOBAS 3.0, dozens of species are supported for Rectome enrichment analysis; default value is the same as `-spe`, but for a species not have the Rectome annotation, a relative or model species must be set by this parameter.
 
-#####`-mod`
+##### -mod
 This parameter is used to set the backgroud for enrichment analysis. We proposed a new enrichment strategy in obaDIA, which use expressed protein as backgroud for the enrichment analysis; this is the default choice. If you want perform enrichment analysis use a traditional manner, which use the total proteins in a species as backgroud, set this parameter as `-mod T`.
 
-#####`-thread`
+##### -thread
 This parameter is used to set the thread number for hmmscan software in annotation step. Because Pfam annotation is time consuming, using multiple threads could dramatically accelerate the annotation step.
 
-#####`-fast`
-This parameter is used to skip several time-consuming steps in obaDIA. It can make the total time consuming of obaDIA pipeline shortened from one to two hours to three to five minutes.
+##### -fast
+This parameter is used to skip several time-consuming steps in obaDIA. No value is needed. It can make the total time consuming of obaDIA pipeline shortened from one to two hours to three to five minutes.
 
 ## Output files
 
