@@ -1,2 +1,0 @@
-# Trinotate
-Trinotate source code

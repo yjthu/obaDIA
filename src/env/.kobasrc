@@ -1,0 +1,11 @@
+[DEFAULT]
+kobas_home = /storage/data/PUBLIC/databases/KOBAS_3.0_db 
+blast_home = /usr/local/bin
+
+[KOBAS]
+kobasdb = %(kobas_home)s/sqlite3/
+
+[BLAST]
+blastp = %(blast_home)s/blastp
+blastx = %(blast_home)s/blastx
+blastdb = %(kobas_home)s/seq_pep/
