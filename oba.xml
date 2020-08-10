@@ -1,0 +1,58 @@
+<tool id="obadia" name="obaDIA" version="1.1">
+  <description>one-step biological analysis pipeline for data-independent acquisition and other quantitative proteomics data </description>
+  <command detect_errors="exit_code"><![CDATA[
+
+  #set obadir = '/storage/data/PROJECT/biouser1/TestDocker/obaDIA'
+  #set workdir = '/storage/data/PROJECT/biouser1/TestDocker/obaDIA/example'
+  #set kobasdbdir = '/storage/data/PUBLIC/databases/KOBAS_3.0_db'
+  #set signalpdir = '/storage/data/PUBLIC/softwares/SignalP/signalp-4.1'
+    
+  #if $fast.value == "yes":
+    perl $obadir/bin/oba.pl -fas '$fa' -exp '$ab' -level '$level' -out $workdir/'$out' -group '$group' -name '$name' -comp '$comp' -fc '$fc' -fdr '$fdr' -spe '$spe' -alt '$alt' -mod '$mod' -thread '$thread' -fast
+  #else:
+    perl $obadir/bin/oba.pl -fas '$fa' -exp '$ab' -level '$level' -out $workdir/'$out' -group '$group' -name '$name' -comp '$comp' -fc '$fc' -fdr '$fdr' -spe '$spe' -alt '$alt' -mod '$mod' -thread '$thread'
+  #end if
+
+  ]]></command>
+
+  <command detect_errors="exit_code"><![CDATA[
+  sh $workdir/'$out'/OneStep.sh >$workdir/'$out'/OneStep.sh.o 2>&1
+  ]]></command>
+
+  <inputs>
+    <param name="fa" type="data" label="Protein squence file, fasta format" />
+    <param format="tabular" name="ab" type="data" label="Protein abundance file, tabular format" />
+    <param name="level" type="select" label="Level of abundance matrix" value="prot">
+      <option value="prot">protein-level</option>
+      <option value="pep">peptide-level</option>
+      <option value="frag">fragment-level</option>
+    </param>
+    <param name="out" type="text" label="The name of the output file directory" />
+
+    <param name="group" type="text" label="Group that the samples belong to" value="A1/A2/A3,B1/B2/B3,C1/C2/C3,D1/D2/D3,E1/E2/E3,F1/F2/F3" help="groups should be seperated by `,`, samples within a group should be seperated by `/`, eg: s1/s2/s3,s4/s5/s6" />
+    <param name="name" type="text" label="The name of each group" value="A,B,C,D,E,F" help="should be seperated by `,` and ordered the same as `-group`, eg: group1,group2" />
+    <param name="comp" type="text" label="How to compare the groups" value="2:1,3:1,4:1,5:1,6:1" help="use indexs of the group name, eg: 2:1,3:1"/>
+    <param name="spe" type="text" label="KOBAS3.0 KEGG enrichment species abbreviation" value="hsa" help="please refer to db/species_abbr.txt file"/>
+    <param name="alt" type="text" label="KOBAS3.0 GO/Rectome enrichment species abbreviation" value="hsa" help="please select a model species"/>
+      <param name="fc" label="Log2FoldChange cutoff for DE proteins" type="float" value="1.0" help="Log2FoldChange should be greater than 0"/>
+      <param name="fdr" label="FDR cutoff for DE proteins by mapDIA" type="float" value="0.1" help="FDR should be between 0 and 1.0"/>
+      <param name="mod" type="select" label="Background choose for enrichment" value="E">
+        <option value="E">expressed</option>
+        <option value="T">total</option>
+      </param>
+      <param name="thread" label="Thread number for hmmscan to perform Pfam annotation" type="text" value="1"/>
+      <param name="fast" type="select" label="Enable fast mode to run the pipeline" value="yes">
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+      </param>
+  </inputs>
+
+
+  <help>
+obaDIA takes a fragment-level, peptide-level or protein-level abundance matrix file from data-independent acquisition (DIA) mass spectrometry experiment,and a FASTA fromat protein sequence file as inputs, performs differential protein expression analysis, functional annotation and enrichment analysis in a completely automate way. obaDIA was designed for data-independent acquisition quantitative proteiomics data initially, it can also be applied to protein-level data produced by other quantitative proteomic techniques, such as iTRAQ/TMT, Label-free proteomics. obaDIA is easy to use and runs fast. All source codes and example data of obaDIA are distributed for academic use only. For any other use, including any commercial use, please contact us first (info@e-omics.com). For more information please reference https://github.com/yjthu/obaDIA.
+  </help>
+  <citations>
+    <citation type="doi">10.1101/2020.05.28.121020</citation>
+  </citations>
+</tool>
+
