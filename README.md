@@ -1,7 +1,7 @@
 # obaDIA
 obaDIA: one-step biological analysis pipeline for data-independent acquisition and other quantitative proteomics data
 
-obaDIA takes a fragment-level, peptide-level or protein-level abundance matrix file from data-independent acquisition (DIA) mass spectrometry experiment,and a FASTA fromat protein sequence file as inputs, performs differential protein expression analysis, functional annotation and enrichment analysis in a completely automate way. obaDIA was designed for data-independent acquisition quantitative proteiomics data initially, it can also be applied to protein-level data produced by other quantitative proteomic techniques, such as iTRAQ/TMT, Label-free proteomics. obaDIA is easy to use and runs fast. All source codes and example data of obaDIA are distributed for academic use only. For any other use, including any commercial use, please contact us first (info@e-omics.com).
+obaDIA takes a FASTA fromat protein sequence file and a fragment-level, peptide-level or protein-level abundance matrix file from data-independent acquisition (DIA) mass spectrometry experiment, performs differential protein expression analysis, functional annotation and enrichment analysis in a completely automate way. obaDIA was designed for DIA data initially, it can also be applied to protein-level data produced by other quantitative proteomic techniques, such as DDA, TMT/iTRAQ, Label-free proteomics. obaDIA is easy to use and runs fast. All source codes and example data of obaDIA are distributed for academic use only. For any other use, including any commercial use, please contact us first (info@e-omics.com).
 
 ## Contents
 * [Installation](#installation)
@@ -16,6 +16,7 @@ obaDIA takes a fragment-level, peptide-level or protein-level abundance matrix f
     * [Input files](#1-input-files)
     * [Edit one of the example scripts](#2-edit-one-of-the-example-scripts)
     * [Run the modified script](#3-run-the-modified-script)
+* [Galaxy GUI](#galaxy-gui)
 * [Parameters](#parameters)
 * [Output files](#output-files)
 * [Citation](#citation)
@@ -62,7 +63,7 @@ We have build a docker image with all dependencies installed for obaDIA, if you 
 docker pull yjcbscau/eomics-base:latest
 ```
 
-Since an academic license is necessary for download and installation of [signalP 4.1](https://services.healthtech.dtu.dk/service.php?SignalP-4.1), you need to install it independently and set the enviroment variable correctly in `env/.bashrc` file. This step can be skipped when you build obaDIA with `bash INSTALL.sh -n` command.
+Since an academic license is required for download and installation of [signalP 4.1](https://services.healthtech.dtu.dk/service.php?SignalP-4.1), you need to install it independently and set the enviroment variable correctly in `env/.bashrc` file. This step can be skipped when you build obaDIA with `bash INSTALL.sh -n` command.
 
 
 Alternatively, if you want to install all dependencies from the beginning, please follow these steps: 
@@ -145,7 +146,7 @@ signalpdir=/storage/data/PUBLIC/softwares/SignalP/signalp-4.1
 
 # 2. creat a docker container named obadia
 docker run -v $workdir:$workdir -v $obadir:$obadir -v $obadir/env:/root -v $kobasdbdir:$kobasdbdir -v $signalpdir:$signalpdir --name obadia yjcbscau/eomics-base /bin/bash
-docker run -it --privileged=true --volumes-from obadia yjcbscau/eomics-base /bin/bash
+docker run -it -w $workdir --privileged=true --volumes-from obadia yjcbscau/eomics-base /bin/bash
 
 # 3. run script in the container
 cd example
@@ -161,11 +162,24 @@ kobasdbdir=/storage/data/PUBLIC/databases/KOBAS_3.0_db
 
 # 2. creat a docker container named obadia
 docker run -v $workdir:$workdir -v $obadir:$obadir -v $obadir/env:/root -v $kobasdbdir:$kobasdbdir --name obadia yjcbscau/eomics-base /bin/bash
-docker run -it --privileged=true --volumes-from obadia yjcbscau/eomics-base /bin/bash
+docker run -it -w $workdir --privileged=true --volumes-from obadia yjcbscau/eomics-base /bin/bash
 
 # 3. run script in the container
 cd example
 nohup sh example_fast.sh &
+```
+
+If you want to run script outside a docker container,  the `--env` parameter needs to be set. Then, the command line is like this:
+```Bash
+# 1. set directories
+workdir=/storage/data/PROJECT/biouser1/TestDocker
+obadir=/storage/data/PROJECT/biouser1/TestDocker/obaDIA
+kobasdbdir=/storage/data/PUBLIC/databases/KOBAS_3.0_db
+signalpdir=/storage/data/PUBLIC/softwares/SignalP/signalp-4.1
+
+# 2. run script outside a temporary docker container
+docker run --rm --env PATH=$obadir/src:$obadir/src/mapDIA:$obadir/src/Trinotate-v3.1.0-pro:$signalpdir:$PATH --env PERL5LIB=$signalpdir/lib/:$PERL5LIB -w $workdir -v $workdir:$workdir -v $obadir:$obadir -v $obadir/env:/root -v $kobasdbdir:$kobasdbdir -v $signalpdir:$signalpdir --privileged=true yjcbscau/eomics-base nohup sh example_fast.sh &
+
 ```
 
 For your own data, please copy the example script to your work dirctory and edit it refer to the `Usage`.
@@ -233,6 +247,21 @@ Once the modification of `example_prot.sh` is complete, you can run it locally o
 nohup sh example_prot.sh &
 
 ```
+
+## Galaxy GUI
+We developed a GUI for [`Galaxy`](https://galaxyproject.org/) users, which looks like this:
+![image](https://github.com/yjthu/obaDIA/blob/master/example/galaxy.png)
+
+All parameters in Galaxy GUI are exactly the same as the command line tool, except for `output file directory`, which a relative directory is needed.
+To use this GUI, you just need to edit the path in `oba.xml` file and add a section in the `tool_conf.xml` file in Galaxy, which looks like this: 
+```Bash
+ <section name="myTools" id="mTools">
+    <tool file="obaDIA/oba.xml" />
+    <tool file="obaDIA/toolExample.xml" />
+ </section>
+```
+
+If all the dependencies of obaDIA have been installed under the Galaxy enviroment, you can run workflow through Galaxy GUI directly. Otherwise, scripts for the whole workflow can still be generated, then, run it in any way you're used to.
 
 ## Parameters
 
@@ -310,7 +339,7 @@ This parameter is used to set the backgroud for enrichment analysis. We proposed
 This parameter is used to set the thread number for hmmscan software in annotation step. Because Pfam annotation is time-consuming, using multiple threads could dramatically accelerate the annotation step.
 
 ##### -fast
-This parameter is used to skip several time-consuming steps in obaDIA. No value is needed. It can make the total time-consuming of obaDIA pipeline shortened from 1~2 hours to 3~5 minutes.
+This parameter is used to skip several time-consuming steps in obaDIA. No value is needed. It can make the total time-consuming of obaDIA pipeline shortened from hours to minutes.
 
 ## Output files
 
