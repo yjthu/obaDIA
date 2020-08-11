@@ -1,7 +1,7 @@
 # obaDIA
 obaDIA: one-step biological analysis pipeline for data-independent acquisition and other quantitative proteomics data
 
-obaDIA takes a FASTA fromat protein sequence file and a fragment-level, peptide-level or protein-level abundance matrix file from data-independent acquisition (DIA) mass spectrometry experiment, performs differential protein expression analysis, functional annotation and enrichment analysis in a completely automate way. obaDIA was designed for DIA data initially, it can also be applied to protein-level data produced by other quantitative proteomic techniques, such as DDA, TMT/iTRAQ, Label-free proteomics. obaDIA is easy to use and runs fast. All source codes and example data of obaDIA are distributed for academic use only. For any other use, including any commercial use, please contact us first (info@e-omics.com).
+obaDIA takes a FASTA fromat protein sequence file and a fragment-level, peptide-level or protein-level abundance matrix file from data-independent acquisition (DIA) mass spectrometry experiment, and performs differential protein expression analysis, functional annotation and enrichment analysis in a completely automated way. obaDIA was designed for DIA data initially, it can also be applied to protein-level data produced by other quantitative proteomic techniques, such as DDA, TMT/iTRAQ, Label-free proteomics. obaDIA is easy to use and runs fast. All source codes and example data of obaDIA are distributed for academic use only. For any other use, including any commercial use, please contact us first (info@e-omics.com).
 
 ## Contents
 * [Installation](#installation)
@@ -48,9 +48,9 @@ Download and build database:
 cd db
 bash build_db.sh
 ```
-This step may take several minites to hours, depend on your network speed.
+This step may take several minutes to hours, depends on your Internet speed.
 
-Then, download species data from Kobas 3.0 database [(ftp://ftp.cbi.pku.edu.cn/pub/KOBAS_3.0_DOWNLOAD)](ftp://ftp.cbi.pku.edu.cn/pub/KOBAS_3.0_DOWNLOAD]), both the files from `seq_pep` and `sqlite3` directories are needed. Abbreviation of sepcies refer to `db/species_abbr.txt`.
+Then, download species data from Kobas 3.0 database [(ftp://ftp.cbi.pku.edu.cn/pub/KOBAS_3.0_DOWNLOAD)](ftp://ftp.cbi.pku.edu.cn/pub/KOBAS_3.0_DOWNLOAD]), both the files from `seq_pep` and `sqlite3` directories are needed. Abbreviation of species refers to `db/species_abbr.txt`.
 
 Finally, set the home directory of Kobas 3.0 database in `env/.kobasrc`, and copy this file to your home dirctory, like this:
 ```Bash
@@ -58,7 +58,7 @@ cp env/.kobasrc ~
 ```
 
 ### 4. Install dependencies
-We have build a docker image with all dependencies installed for obaDIA, if you are a docker user, just get the image through command:
+We have built a docker image with all dependencies installed for obaDIA, if you are a docker user, just get the image using the following command:
 ```Bash
 docker pull yjcbscau/eomics-base:latest
 ```
@@ -69,9 +69,7 @@ Since an academic license is required for download and installation of [signalP 
 Alternatively, if you want to install all dependencies from the beginning, please follow these steps: 
 
 #### 4.1. Install conda and activate a new conda environment
-Dowload and install a version of minicoda from [https://docs.conda.io/en/latest/miniconda.html](https://docs.conda.io/en/latest/miniconda.html)
-
-Then, add bioconda channels, creat a new python2 evironment and activate it
+To download and install a version of minicoda from [https://docs.conda.io/en/latest/miniconda.html](https://docs.conda.io/en/latest/miniconda.html), then add bioconda channels, creat a new python2 evironment and activate it.
 ```Bash
 conda create -n obadia python=2
 . activate obadia
@@ -82,7 +80,7 @@ conda create -n obadia python=2
 conda install R==3.6 r-xml
 ```
 
-Then, enter R environment and install required packages
+Then, to enter R environment and install required packages
 ```R
 # Install R packages
 # 1. from CRAN
@@ -120,7 +118,7 @@ pip install eventlet bs4 django==1.8.3
 
 #### 4.5. Check the build-in dependencies
 
-Binary executable program of [`hmmpress`](http://hmmer.org/download.html), [`hmmscan`](http://hmmer.org/download.html), [`diamond`](https://github.com/bbuchfink/diamond), [`mapDIA`](https://sourceforge.net/projects/mapdia) and a slightly modified version of [`Trinotate-v3.1.0`](https://github.com/Trinotate/Trinotate/releases/tag/Trinotate-v3.1.0) software (named `Trinotate-v3.1.0-pro`) have already in the `src` folder along with the obaDIA release, make sure they can work correctly in your system. Otherwise, reinstall them through conda or from source.
+Binary executable program of [`hmmpress`](http://hmmer.org/download.html), [`hmmscan`](http://hmmer.org/download.html), [`diamond`](https://github.com/bbuchfink/diamond), [`mapDIA`](https://sourceforge.net/projects/mapdia) and a slightly modified version of [`Trinotate-v3.1.0`](https://github.com/Trinotate/Trinotate/releases/tag/Trinotate-v3.1.0) software (named `Trinotate-v3.1.0-pro`) have already been included into the `src` folder along with the obaDIA release, and to make sure that they can work correctly in your system. Otherwise, to reinstall them with conda or source.
 
 Finally, copy the enviroment variable for obaDIA in `env/.bashrc` file to your home `~/.bashrc` file
 
@@ -182,7 +180,7 @@ docker run --rm --env PATH=$obadir/src:$obadir/src/mapDIA:$obadir/src/Trinotate-
 
 ```
 
-For your own data, please copy the example script to your work dirctory and edit it refer to the `Usage`.
+For your own data, please copy the example script to your work directory and edit it referring to the `Usage`.
 
 
 ## Usage
@@ -207,17 +205,17 @@ We provide four example script files in `example` directory, they are:
 example_prot.sh		# A standard script to run obaDIA using a protein-level matrix as input.
 example_pep.sh		# A standard script to run obaDIA using a peptide-level matrix as input.
 example_frag.sh		# A standard script to run obaDIA using a fragment-level matrix as input.
-example_fast.sh		# Another script to run obaDIA using a protein-level matrix as input, but use the fast mode to skip several time-consuming steps.
+example_fast.sh		# Another script to run obaDIA using a protein-level matrix as input, which is the fast mode skipping several time-consuming steps.
 ```
 
 What you need to do is copy one of these files to your work dirctory and edit it according to your own needs.
-Now, take the `example_prot.sh` file as an example, to explain how the script works:
+Now, to take the `example_prot.sh` file as an example, and explain how the script works:
 ```Bash
 
 # get the current work directory
-dir=`pwd`			
+dir=`pwd`
 
-# set the directory of input and output files, must be absolute directory 
+# set the absolute directory of input and output files
 fa=$dir/seq.fa
 ab=$dir/ab.tsv
 out=$dir/outdir
@@ -242,7 +240,7 @@ sh $out/OneStep.sh >$out/OneStep.sh.o 2>&1
 ```
 
 #### 3. Run the modified script
-Once the modification of `example_prot.sh` is complete, you can run it locally or submit it to the cluster
+Once the modification of `example_prot.sh` is completed, you can run it locally or submit it to the cluster
 ```Bash
 nohup sh example_prot.sh &
 
@@ -252,8 +250,8 @@ nohup sh example_prot.sh &
 We developed a GUI for [`Galaxy`](https://galaxyproject.org/) users, which looks like this:
 ![image](https://github.com/yjthu/obaDIA/blob/master/example/galaxy.png)
 
-All parameters in Galaxy GUI are exactly the same as the command line tool, except for `output file directory`, which a relative directory is needed.
-To use this GUI, you just need to edit the path in `oba.xml` file and add a section in the `tool_conf.xml` file in Galaxy, which looks like this: 
+All parameters in Galaxy GUI are exactly the same as the command line tool, except for `output file directory`, which requires a relative directory.
+To use this GUI, you just need to edit the path in `oba.xml` file and add a section to the `tool_conf.xml` file in Galaxy, which looks like this: 
 ```Bash
  <section name="myTools" id="mTools">
     <tool file="obaDIA/oba.xml" />
@@ -261,11 +259,11 @@ To use this GUI, you just need to edit the path in `oba.xml` file and add a sect
  </section>
 ```
 
-If all the dependencies of obaDIA have been installed under the Galaxy enviroment, you can run workflow through Galaxy GUI directly. Otherwise, scripts for the whole workflow can still be generated, then, run it in any way you're used to.
+If all the dependencies of obaDIA have been installed under the Galaxy enviroment, you can run workflow through Galaxy GUI directly. Otherwise, scripts for the whole workflow can still be generated, and then run it in any way you're used to.
 
 ## Parameters
 
-The parameters and description of obaDIA can be get through the command:
+The parameters and description of obaDIA can be obtained through the command:
 ```Bash
 perl ../bin/oba.pl
 ```
@@ -300,25 +298,25 @@ Optional:
 
 Each parameter is explained in detail as follows:
 ##### -fas
-This parameter is used to set the input protein sequence file. Only standard FASTA format file is accepted, with the first line is the protein identifier start with `>`, the second line is the protein sequence, the protein sequence can also be broken into multiple lines. The protein identifier must be consist of letters and numbers, and no blank or special characters are allowed, except for `_`. For the the protein identifier uniprot ID is prefered because we need to link it to the uniprotKB database, but this is not necessary.
+This parameter is used to set the input protein sequence file. Standard FASTA format file is only accepted-the first line is the protein identifier starting with `>` and the second line is the protein sequence that can also be broken into multiple lines. The protein identifiers must consist of letters and numbers, and no blank or special characters are allowed, except for `_`. For the the protein identifier uniprot ID is prefered because we need to link it to the uniprotKB database, but this is not necessary.
 
 ##### -exp
-This parameter is used to set the input abundance matrix file. Only standard TSV format file is accepted, which means each column is seperated by tab. For DIA data, protein-level, peptide-level or fragment-level matrix is acceptable, if use protein-level file as input, no need to set the `-level` parameter; if use peptide-level or fragment-level matrix as input, the `-level`  parameter must be set to either `pep` or `frag`.
+This parameter is used to set the input abundance matrix file. Ttandard TSV format file is only accepted, which means each column is seperated by tab. For DIA data, protein-level, peptide-level or fragment-level matrix is acceptable, if using protein-level file as input, no need to set the `-level` parameter; if using peptide-level or fragment-level matrix as input, the `-level`  parameter must be set to either `pep` or `frag`.
 
 ##### -level
-This parameter is used to set the level or type of input abundance matrix file. The default value is `prot`; if use peptide-level or fragment-level matrix as input, it must be set to either `pep` or `frag`.
+This parameter is used to set the level or type of input abundance matrix file. The default value is `prot`; if using peptide-level or fragment-level matrix as input, it must be set to either `pep` or `frag`.
 
 ##### -out
-This parameter is used to set the output directory, it must be a absolute path, a reletive path is not allowed.
+This parameter is used to set the output directory, it must be an absolute path since a reletive path is not allowed.
 
 ##### -group
-This parameter is used to assign the samples to the groups and set the order of groups. Use sample names but not group names to set it. For samples in the same group, the sample names should be seperated by `/`. For different groups, the seperater between samples should be `,`. The sample names must can be found in the first row of the abundance matrix, and must be consist of letters and numbers, and no blank or special characters are allowed, except for `_`.
+This parameter is used to assign the samples to the groups and set the order of groups. Using sample names rather than group names to set it. For samples in the same group, the sample names should be seperated by `/`. For different groups, the delimiter between samples should be `,`. The sample names must be found in the first row of the abundance matrix and consist of letters and numbers, and no blank or special characters are allowed except for `_`.
 
 ##### -name
 This parameter is used to set the group names, according to the order of `-group` parameter.
 
 ##### -comp
-This parameter is used to set the comparison between groups for DE analysis. For only one comparison, the default value is set to `1:2`; for multiple comparisons, it must be set according to the index of the order of `-name` parameter. For example, `-comp 2:1,3:1,4:1,5:1,6:1` means every group shoud be compared to the first group, with the first group as a control.
+This parameter is used to set the comparison between groups for DE analysis. For only one comparison, the default value is set to `1:2`; for multiple comparisons, it must be set according to the index of the order of `-name` parameter. For example, `-comp 2:1,3:1,4:1,5:1,6:1`, indicating every group shoud be compared to the first group that is designed as control.
 
 ##### -fc
 This parameter is used to set the log2(foldChange) cutoff for DE proteins. The default value is 1.
@@ -330,25 +328,25 @@ This parameter is used to set the FDR(false discovery rate) cutoff generated by 
 This parameter is used to set the abbreviation of species for KEGG enrichment analysis. At the present release of KOBAS 3.0, more than 4000 species are supported which can refer to the "db/species_abbr.txt" file; for species not in this list, a relative or model species should be selected.
 
 ##### -alt
-This parameter is used to set the abbreviation of species for GO/Rectome enrichment analysis. At the present release of KOBAS 3.0, dozens of species are supported for Rectome enrichment analysis; default value is the same as `-spe`, but for a species not have the Rectome annotation, a relative or model species must be set by this parameter.
+This parameter is used to set the abbreviation of species for GO/Rectome enrichment analysis. At the present release of KOBAS 3.0, dozens of species are supported for Rectome enrichment analysis; default value is the same as `-spe`, but for a species missing the Rectome annotation, a relative or model species must be set by this parameter.
 
 ##### -mod
-This parameter is used to set the backgroud for enrichment analysis. We proposed a new enrichment strategy in obaDIA, which use expressed protein as backgroud for the enrichment analysis; this is the default choice. If you want perform enrichment analysis use a traditional manner, which use the total proteins in a species as backgroud, set this parameter as `-mod T`.
+This parameter is used to set the backgroud for enrichment analysis. We proposed a new enrichment strategy in obaDIA, using the expressed protein as backgroud for the enrichment analysis, which is the default choice. If you want to perform enrichment analysis by means of a traditional manner, which uses the total proteins in a species as backgroud, please set this parameter as `-mod T`.
 
 ##### -thread
 This parameter is used to set the thread number for hmmscan software in annotation step. Because Pfam annotation is time-consuming, using multiple threads could dramatically accelerate the annotation step.
 
 ##### -fast
-This parameter is used to skip several time-consuming steps in obaDIA. No value is needed. It can make the total time-consuming of obaDIA pipeline shortened from hours to minutes.
+This parameter is used to skip several time-consuming steps in obaDIA. No value is needed. It can make the total time-consuming of obaDIA pipeline shorten from hours to minutes.
 
 ## Output files
 
-The output files could be slightly different based on the parameters. A typical output files dirctory is as follow, with the main result files marked:
+The output files could be slightly different based on the parameters. A typical output files dirctory is as follow, and the main result files are given descriptive explanation:
 ```Bash
 outdir/                                               
 ├── Anno                                               # Functional annotation output directory
 │   ├── Annotation.txt
-│   ├── Annotation.xls                                 # formated annotation summay table
+│   ├── Annotation.xls                                 # formatted annotation summay table
 │   ├── blastp.outfmt6
 │   ├── eggNOG.anno
 │   ├── eggNOG.anno.plotdata
@@ -382,7 +380,7 @@ outdir/
 │   │   │   ├── BvsA.diff.id
 │   │   │   ├── BvsA.diff.seq
 │   │   │   ├── BvsA.diff.updown
-│   │   │   ├── BvsA.diff.xls                          # formated differntial expression information table 
+│   │   │   ├── BvsA.diff.xls                          # formatted differntial expression information table 
 │   │   │   ├── BvsA.diff.xls.volcano.pdf              # volcano plot
 │   │   │   └── BvsA.diff.xls.volcano.png
 │   │   ├── CvsA
@@ -415,7 +413,7 @@ outdir/
 │       ├── DIA.means.xls.corMatrix.png
 │       ├── DIA.means.xls.density.pdf                  # mean abundance density plot
 │       ├── DIA.means.xls.density.png
-│       ├── DIA.means.xls.violon.pdf                   # mean abundance violon plot
+│       ├── DIA.means.xls.violon.pdf                   # mean abundance violin plot
 │       ├── DIA.means.xls.violon.pdf
 │       ├── DIA.normalized.xls                         # normalized abundance table
 │       ├── DIA.normalized.xls.abHeatmap.pdf           # normalized abundance heatmap
@@ -428,7 +426,7 @@ outdir/
 │       ├── DIA.normalized.xls.corMatrix.png
 │       ├── DIA.normalized.xls.density.pdf             # normalized abundance density plot
 │       ├── DIA.normalized.xls.density.png
-│       ├── DIA.normalized.xls.violon.pdf              # normalized abundance violon plot
+│       ├── DIA.normalized.xls.violon.pdf              # normalized abundance violin plot
 │       └── DIA.normalized.xls.violon.png
 ├── Enrich                                             # Functional enrichment analysis directory
 │   ├── All                                            # Expressed protein functional enrichment analysis directory
@@ -437,17 +435,17 @@ outdir/
 │   │   ├── All.hsa.annotate
 │   │   ├── All.hsa.dmout
 │   │   ├── All.identify.GO
-│   │   ├── All.identify.GO.xls                        # formated GO enrichment result table
+│   │   ├── All.identify.GO.xls                        # formatted GO enrichment result table
 │   │   ├── All.identify.Kegg
 │   │   ├── All.identify.Rectome
 │   │   ├── All.identify.Rectome.top20
-│   │   ├── All.identify.Rectome.xls                   # formated Rectome enrichment result table
+│   │   ├── All.identify.Rectome.xls                   # formatted Rectome enrichment result table
 │   │   ├── All.KeggEnrich
-│   │   ├── All.KeggEnrich.html                        # KEGG enrichment html formated report
+│   │   ├── All.KeggEnrich.html                        # KEGG enrichment html formatted report
 │   │   ├── All.KeggEnrich.top20
 │   │   ├── All.KeggEnrich.top20.scatterplot.pdf       # KEGG enrichment scatter plot
 │   │   ├── All.KeggEnrich.top20.scatterplot.png
-│   │   ├── All.KeggEnrich.xls                         # formated KEGG enrichment result table
+│   │   ├── All.KeggEnrich.xls                         # formatted KEGG enrichment result table
 │   │   ├── All.Rectome.Enrich.scatterplot.pdf         # Rectome enrichment scatter plot
 │   │   ├── All.Rectome.Enrich.scatterplot.png
 │   │   ├── go.resource
@@ -466,25 +464,25 @@ outdir/
 │   │   ├── BvsA.hsa.annotate
 │   │   ├── BvsA.hsa.dmout
 │   │   ├── BvsA.identify.GO
-│   │   ├── BvsA.identify.GO.xls                       # formated GO enrichment result table
+│   │   ├── BvsA.identify.GO.xls                       # formatted GO enrichment result table
 │   │   ├── BvsA.identify.Kegg
 │   │   ├── BvsA.identify.pfam
-│   │   ├── BvsA.identify.pfam.xls                     # formated PFAM enrichment result table
+│   │   ├── BvsA.identify.pfam.xls                     # formatted PFAM enrichment result table
 │   │   ├── BvsA.identify.pfam.xls.top20
 │   │   ├── BvsA.identify.Rectome
 │   │   ├── BvsA.identify.Rectome.top20
-│   │   ├── BvsA.identify.Rectome.xls                  # formated Rectome enrichment result table
+│   │   ├── BvsA.identify.Rectome.xls                  # formatted Rectome enrichment result table
 │   │   ├── BvsA.KeggEnrich
 │   │   ├── BvsA.KeggEnrich.html
 │   │   ├── BvsA.KeggEnrich.top20
 │   │   ├── BvsA.KeggEnrich.top20.scatterplot.pdf      # KEGG enrichment scatter plot
 │   │   ├── BvsA.KeggEnrich.top20.scatterplot.png
-│   │   ├── BvsA.KeggEnrich.xls                        # formated KEGG enrichment result table
+│   │   ├── BvsA.KeggEnrich.xls                        # formatted KEGG enrichment result table
 │   │   ├── BvsA.PFAM.Enrich.scatterplot.pdf           # PFAM enrichment scatter plot
 │   │   ├── BvsA.PFAM.Enrich.scatterplot.png
 │   │   ├── BvsA.Rectome.Enrich.scatterplot.pdf        # Rectome enrichment scatter plot
 │   │   ├── BvsA.Rectome.Enrich.scatterplot.png
-│   │   ├── gene2pfam_formated.txt
+│   │   ├── gene2pfam_formatted.txt
 │   │   ├── go.resource
 │   │   └── src
 │   ├── CvsA
