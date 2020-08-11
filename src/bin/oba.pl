@@ -183,7 +183,7 @@ foreach my $each(@compares){
 		if(!defined $fast){
 			print OUT "perl $bin/Enrich/enrichP.pl -directory-kobas-output $outdir/Enrich/$each -samplename $each -species $species -bg $outdir/Enrich/All/All -mod $mod -diffGeneSeq $outdir/Diff/diff_results/$each/$each.diff.seq -goanno $outdir/Anno/GO.anno -pfanno $outdir/Anno/PFAM.anno -summary $outdir/Enrich/All/seq.len -diffid $outdir/Diff/diff_results/$each/$each.diff.id -updown $outdir/Diff/diff_results/$each/$each.diff.updown -difftb $outdir/Diff/diff_results/$each/$each.diff.xls -ko $ko -spe_go $spe_go\n";
 		}else{
-			print OUT "perl $bin/Enrich/enrichP.pl -directory-kobas-output $outdir/Enrich/$each -samplename $each -species $species -mod T -diffGeneSeq $outdir/Diff/diff_results/$each/$each.diff.seq -summary $outdir/Enrich/All/seq.len -diffid $outdir/Diff/diff_results/$each/$each.diff.id -difftb $outdir/Diff/diff_results/$each/$each.diff.xls -ko $ko -spe_go $spe_go\n";
+			print OUT "perl $bin/Enrich/enrichP.pl -directory-kobas-output $outdir/Enrich/$each -samplename $each -species $species -mod $mod -diffGeneSeq $outdir/Diff/diff_results/$each/$each.diff.seq -summary $outdir/Enrich/All/seq.len -diffid $outdir/Diff/diff_results/$each/$each.diff.id -difftb $outdir/Diff/diff_results/$each/$each.diff.xls -ko $ko -spe_go $spe_go\n";
 		}
 }
 close OUT;
