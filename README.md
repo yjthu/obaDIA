@@ -301,7 +301,7 @@ Each parameter is explained in detail as follows:
 This parameter is used to set the input protein sequence file. Standard FASTA format file is only accepted-the first line is the protein identifier starting with `>` and the second line is the protein sequence that can also be broken into multiple lines. The protein identifiers must consist of letters and numbers, and no blank or special characters are allowed, except for `_`. For the the protein identifier uniprot ID is prefered because we need to link it to the uniprotKB database, but this is not necessary.
 
 ##### -exp
-This parameter is used to set the input abundance matrix file. Ttandard TSV format file is only accepted, which means each column is seperated by tab. For DIA data, protein-level, peptide-level or fragment-level matrix is acceptable, if using protein-level file as input, no need to set the `-level` parameter; if using peptide-level or fragment-level matrix as input, the `-level`  parameter must be set to either `pep` or `frag`.
+This parameter is used to set the input abundance matrix file. Standard TSV format file is only accepted, which means each column is seperated by tab. For DIA data, protein-level, peptide-level or fragment-level matrix is acceptable, if using protein-level file as input, no need to set the `-level` parameter; if using peptide-level or fragment-level matrix as input, the `-level`  parameter must be set to either `pep` or `frag`.
 
 ##### -level
 This parameter is used to set the level or type of input abundance matrix file. The default value is `prot`; if using peptide-level or fragment-level matrix as input, it must be set to either `pep` or `frag`.
@@ -482,7 +482,7 @@ outdir/
 │   │   ├── BvsA.PFAM.Enrich.scatterplot.png
 │   │   ├── BvsA.Rectome.Enrich.scatterplot.pdf        # Rectome enrichment scatter plot
 │   │   ├── BvsA.Rectome.Enrich.scatterplot.png
-│   │   ├── gene2pfam_formatted.txt
+│   │   ├── gene2pfam_formated.txt
 │   │   ├── go.resource
 │   │   └── src
 │   ├── CvsA
