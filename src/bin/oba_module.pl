@@ -14,7 +14,7 @@ Version:	v1.1
 
 Options
 
-	Required:
+	Common:
 		-m		<s> : choose the module you want to run [diff/anno/enrich]
 		-o		<s> : output directory
 		-h|?|help	    :  Show this help
