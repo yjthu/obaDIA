@@ -523,7 +523,7 @@ Options
                 -groupname      <s> : group names, default group1,group2,...
                 -compare        <f> : how to compare the groups, e.g. 1:2,1:3; Please input in order of trait:control 1vs2
                 -fc_cutoff      <f> : default: 1
-                -fdr_cutoff <f> : default: 0.1
+                -fdr_cutoff 	<f> : default: 0.1
                 -level          <s> : level of abundance matrix. Choice are prot/pep/frag [default: prot]
 
         Anno:
