@@ -17,7 +17,7 @@ rm -rf $dir/bin $dir/env
 cp -rf $dir/src/bin $dir/bin
 cp -rf $dir/src/env $dir/env
 
-sed -i "s#$base_dir#$dir#g" $dir/bin/oba.pl 
+sed -i "s#$base_dir#$dir#g" $dir/bin/oba*.pl 
 sed -i "s#$base_dir#$dir#g" $dir/env/.bashrc
 
 ls $dir/bin/*/*.*|while read a;do sed -i "s#$base_dir#$dir#g" $a;done
