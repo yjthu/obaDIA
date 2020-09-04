@@ -78,6 +78,8 @@ if(!-e  "$kobasDB/seq_pep/$species.dmnd"){
 	`chmod 777 $kobasDB/seq_pep/$species.dmnd`;
 }
 
+$spe_go ||= $species;
+
 if($spe_go ne $species && $spe_go ne 'na'){
 	if(-e "$kobasDB/seq_pep/$spe_go.pep.fasta.gz" || -e "$kobasDB/sqlite3/$spe_go.db.gz"){
 		`gunzip $kobasDB/seq_pep/$spe_go.pep.fasta.gz`;
@@ -90,7 +92,7 @@ if($spe_go ne $species && $spe_go ne 'na'){
 }
 
 $ko ||= 'no';
-$spe_go ||= $species;
+#$spe_go ||= $species;
 $mod ||= 'E';
 my $identify_bg = $species;
 
