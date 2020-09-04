@@ -19,6 +19,7 @@ obaDIA takes a FASTA fromat protein sequence file and a fragment-level, peptide-
 * [Galaxy GUI](#galaxy-gui)
 * [Parameters](#parameters)
 * [Output files](#output-files)
+* [Modular version](#modular-version)
 * [Citation](#citation)
 
 ## Installation
@@ -497,6 +498,74 @@ outdir/
 
 ```
 
+## Modular version
+
+A modular version of obaDIA is provided in a recent release, with each functional module can be run independently, and facilitate integration into personalized workflows. Its usage is quite similar to the one-step version. Its parameters and description can be obtained through the command:
+
+```Bash
+perl ../bin/oba_module.pl
+
+```
+
+All parameters and short descriptions will be shown like this:
+
+```Bash
+Options
+
+        Required:
+                -m              <s> : choose the module you want to run [diff/anno/enrich]
+                -o              <s> : output directory
+                -h|?|help           :  Show this help
+
+        Diff:
+                -expr           <s> : Abundance matrix, can be protein-level, peptide-level or fragment-level
+                -group          <s> : group that the samples belong, e.g. sample1/sample2,sample3
+                -groupname      <s> : group names, default group1,group2,...
+                -compare        <f> : how to compare the groups, e.g. 1:2,1:3; Please input in order of trait:control 1vs2
+                -fc_cutoff      <f> : default: 1
+                -fdr_cutoff <f> : default: 0.1
+                -level          <s> : level of abundance matrix. Choice are prot/pep/frag [default: prot]
+
+        Anno:
+                -fa             <s> : protein squence file, fasta format.
+
+        Enrich:
+                -name           <s> : sample name for output files
+                -species        <s> : species for kegg or background annotate file
+                -fa             <s> : DE protein sequence fasta
+```
+
+1. Use the ABDE module:
+
+```Bash
+perl ../bin/oba_module.pl \
+-m diff \
+-o $PWD/diff \
+-expr $PWD/ab.tsv \
+-group A1/A2/A3,B1/B2/B3,C1/C2/C3,D1/D2/D3,E1/E2/E3,F1/F2/F3 \
+-groupname A,B,C,D,E,F \
+-compare 2:1,3:1,4:1,5:1,6:1
+```
+
+2. Use the Annotation module:
+
+```Bash
+perl ../bin/oba_module.pl \
+-m anno \
+-o $PWD/anno \
+-fa $PWD/seq.fa
+```
+
+3. Use the Enrichment module:
+
+```Bash
+perl ../bin/oba_module.pl \
+-m enrich \
+-o $PWD/enrich \
+-name test \
+-species hsa \
+-fa $PWD/seq.fa
+```
 
 ## Citation
 
