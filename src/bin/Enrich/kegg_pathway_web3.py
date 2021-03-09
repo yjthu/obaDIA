@@ -1,5 +1,6 @@
 #Web-visualization for pathway enrichment result
-#yj 2020-03-08
+#guoyang 2012-11-06
+#yj 20209-03-08
 import sys
 import os
 import os.path
@@ -127,6 +128,8 @@ def main_flow(row):
 
 			map=soup.map
 			for each_area in map.find_all('area'):
+				if not (each_area.has_attr('id') and each_area.has_attr('href') and each_area.has_attr('class') and each_area['class'] == 'original'):
+					continue
 				ko_set=[each_ko.strip() for each_ko in re.search(r'\?(.*)',each_area['href']).group(1).split('+')]
 				each_area['href']='https://www.genome.jp'+each_area['href']
 				inner_html='<ul>'
