@@ -571,4 +571,4 @@ perl ../bin/oba_module.pl \
 
 If you use obaDIA in your work, please cite the publication as follows:
 
-Yan J, Zhai H, Zhu L, Ding X. obaDIA: one-step biological analysis pipeline for quantitative proteomics data from data independent acquisition mass spectrometry. bioRxiv 2020.05.28.121020; doi: https://doi.org/10.1101/2020.05.28.121020
+Jun Yan, Hongning Zhai, Ling Zhu, Sasha Sa, Xiaojun Ding. obaDIA: one-step biological analysis pipeline for data-independent acquisition and other quantitative proteomics data, Bioinformatics, 2020, btaa893, https://doi.org/10.1093/bioinformatics/btaa893
